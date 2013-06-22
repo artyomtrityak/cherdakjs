@@ -10,6 +10,29 @@ module.exports = function(grunt) {
       }
     },
 
+    requirejs: {
+      options: {
+        baseUrl: '.',
+        appDir: 'dev/app',
+        mainConfigFile: 'dev/app/main.js',
+        optimize: 'uglify2',
+        generateSourceMaps: true,
+        preserveLicenseComments: false,
+        useStrict: true,
+        removeCombined: true,
+        modules: [
+          {
+            name: 'main'
+          }
+        ]
+      },
+      en: {
+        options: {
+          dir: 'app_builds'
+        }
+      }
+    },
+
     karma: {
       unit: {
         configFile: 'dev/tests/karma-config.js',
@@ -41,6 +64,6 @@ module.exports = function(grunt) {
     grunt.task.run(tasks);
   });
 
-  grunt.registerTask('build', []);
+  grunt.registerTask('build', ['requirejs']);
   grunt.registerTask('default', ['run']);
 };
